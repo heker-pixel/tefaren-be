@@ -8,9 +8,19 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Pengguna;
 use App\Models\Jurusan; // Add the Jurusan model
 use App\Models\Jabatan; // Add the Jabatan model
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
+
+    public function regenerateApiKey($user)
+    {
+        $apiKey = Str::random(32); // Generate a new API key
+        $user->api_key = $apiKey;
+        $user->save();
+    }
+    
+
     /**
      * User registration
      *
@@ -59,7 +69,8 @@ class AuthController extends Controller
                 $pengguna->id_jabatan = $jabatan->id_jabatan; // Use the 'id_jabatan' column for the association
             }
         }
-    
+        $this->regenerateApiKey($pengguna);
+
         $pengguna->save();
     
         return response()->json([
@@ -70,6 +81,7 @@ class AuthController extends Controller
                 "tipe_pengguna" => $pengguna->tipe_pengguna,
                 "id_jurusan" => $pengguna->id_jurusan,
                 "id_jabatan" => $pengguna->id_jabatan,
+                "api_key" => $pengguna->api_key, // Include the new API key in the response
             ]
         ]);
     }

@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BarangController;
 use App\Http\Middleware\AuthenticateUser;
+use App\Http\Middleware\ApiKeyMiddleware;
+
 use App\Http\Controllers\CountController;
 use App\Http\Controllers\PenggunaController;
 
