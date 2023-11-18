@@ -17,9 +17,6 @@ class KategoriSeeder extends Seeder
             ['kategori' => 'Laptop'],
             ['kategori' => 'Smartphone'],
             ['kategori' => 'Tablet'],
-            ['kategori' => 'VR'],
-
-            // Add more entries as needed
         ];
 
         Kategori::insert($KategoriData);
